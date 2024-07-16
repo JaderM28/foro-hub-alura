@@ -52,6 +52,22 @@ public class TopicoController {
         return datos;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity findOneTopicos(
+            @PathVariable Long id){
+
+        Optional<Topico> datosTopico = topicoRepository.findById(id);
+        if(datosTopico.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+
+        Topico topicoEncontrado = datosTopico.get();
+
+        var response = new ResponsePostDto(topicoEncontrado);
+
+        return ResponseEntity.ok(response);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity updateTopicos(
             @PathVariable Long id,

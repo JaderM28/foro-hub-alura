@@ -1,5 +1,7 @@
 package com.valhalla.foro_hub_alura.controller;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
+import jakarta.servlet.ServletException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -21,9 +23,8 @@ public class ErroresGlobales {
         return ResponseEntity.badRequest().body(errores);
     }
 
-    @ExceptionHandler(AccessDeniedException.class )
-    @ResponseBody
-    public ResponseEntity<Object> handleAccessDeniedException(AccessDeniedException ex) {
+    @ExceptionHandler(TokenExpiredException.class )
+    public ResponseEntity<Object> handleAccessDeniedException(TokenExpiredException ex) {
         Map<String, Object> responseBody = new HashMap<>();
         responseBody.put("status", HttpStatus.FORBIDDEN.value());
         responseBody.put("error", "Acceso denegado");
