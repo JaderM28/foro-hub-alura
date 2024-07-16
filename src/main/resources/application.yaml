@@ -1,0 +1,22 @@
+
+server:
+  error:
+
+spring:
+  application:
+    name: foro-hub-alura
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}/foro_hub_alura
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    format-sql: true
+
+api:
+  security:
+    secret: ${JWT_SECRET:123456}
